@@ -1,3 +1,4 @@
+shopping_list = [] 
 def display_menu():  # Ensure only these options are printed as expected by the checker
     print("1. Add Item")
     print("2. Remove Item")
@@ -5,7 +6,7 @@ def display_menu():  # Ensure only these options are printed as expected by the 
     print("4. Exit")
 
 def main():
-    shopping_list = [] 
+    
     while True:
         display_menu()  
         try:
