@@ -6,42 +6,40 @@ def display_menu():
     print("4. Exit")
 
 def main():
-    shopping_list = []  # Start with an empty list
+    shopping_list = []
     while True:
-        display_menu()  # Show menu options
-        try:
-            choice = int(input("Enter your choice: "))  # Get user input as a number
+        display_menu()
+        choice = input("Enter your choice: ")
 
-            if choice == 1:  # Add item
-                item = input("Enter the item name: ")  # Ask for the item to add
-                shopping_list.append(item)  # Add the item to the list
-                print(f"{item} has been added to your shopping list.")
+        if choice == '1':
+            # Prompt for and add an item
+            item = input("Enter the item name: ")
+            shopping_list.append(item)
+            print(f"{item} has been added to your shopping list.")
 
-            elif choice == 2:  # Remove item
-                item = input("Enter the item name to remove: ")  # Ask for the item to remove
-                if item in shopping_list:  # Check if the item is in the list
-                    shopping_list.remove(item)  # Remove the item
-                    print(f"{item} has been removed from your shopping list.")
-                else:
-                    print(f"{item} not found in the shopping list.")  # If the item doesn't exist
-
-            elif choice == 3:  # View list
-                if not shopping_list:  # Check if the list is empty
-                    print("Your shopping list is empty.")
-                else:
-                    print("Your shopping list:")
-                    for item in shopping_list:  # Loop through the list and print each item
-                        print(f"- {item}")
-
-            elif choice == 4:  # Exit
-                print("Goodbye!")
-                break  # Exit the loop, ending the program
-
+        elif choice == '2':
+            # Prompt for and remove an item
+            item = input("Enter the item name to remove: ")
+            if item in shopping_list:
+                shopping_list.remove(item)
+                print(f"{item} has been removed from your shopping list.")
             else:
-                print("Invalid choice. Please try again.")
-        
-        except ValueError:
-            print("Please enter a valid number.")  # Handle non-integer inputs
+                print(f"{item} not found in the shopping list.")
+
+        elif choice == '3':
+            # Display the shopping list
+            if not shopping_list:
+                print("Your shopping list is empty.")
+            else:
+                print("Your shopping list:")
+                for item in shopping_list:
+                    print(f"- {item}")
+
+        elif choice == '4':
+            print("Goodbye!")
+            break
+        else:
+            print("Invalid choice. Please try again.")
 
 if __name__ == "__main__":
     main()
