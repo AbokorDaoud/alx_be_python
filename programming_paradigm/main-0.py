@@ -1,33 +1,33 @@
 import sys
 from bank_account import BankAccount
 
-# Initialize the BankAccount with balance persistence
-account = BankAccount()
+def main():
+    # Initialize the account with a starting balance (example: $100)
+    account = BankAccount(100)
+
+    # Ensure a command is provided
+    if len(sys.argv) < 2:
+        print("Usage: python main-0.py <command>:<amount>")
+        print("Commands: deposit, withdraw, display")
+        sys.exit(1)
+
+    # Split the command and the amount (if any)
+    command, *params = sys.argv[1].split(':')
+    amount = float(params[0]) if params else None
+
+    # Perform the corresponding operation based on the command
+    if command == "deposit" and amount is not None:
+        account.deposit(amount)
+        print(f"Deposited: ${amount:.2f}")
+    elif command == "withdraw" and amount is not None:
+        if account.withdraw(amount):
+            print(f"Withdrew: ${amount:.2f}")
+        else:
+            print("Insufficient funds.")
+    elif command == "display":
+        account.display_balance()
+    else:
+        print("Invalid command.")
 
 if __name__ == "__main__":
-    # Check if there is any command-line argument
-    if len(sys.argv) == 2:
-        action = sys.argv[1]
-        
-        # Check if the action is 'deposit' or 'withdraw' with an amount
-        if "deposit" in action:
-            try:
-                amount = float(action.split(":")[1])
-                print(account.deposit(amount))
-            except ValueError:
-                print("Invalid amount. Please enter a valid number for deposit.")
-        
-        elif "withdraw" in action:
-            try:
-                amount = float(action.split(":")[1])
-                print(account.withdraw(amount))
-            except ValueError:
-                print("Invalid amount. Please enter a valid number for withdrawal.")
-        
-        # Check if the action is 'display'
-        elif action == "display":
-            print(account.display_balance())
-        else:
-            print("Invalid command. Use 'deposit:<amount>', 'withdraw:<amount>', or 'display'.")
-    else:
-        print("Usage: python main-0.py [action:amount] or display")
+    main()
